@@ -1,5 +1,3 @@
-import { Ratio } from "lucide-react";
-import { data } from "react-router";
 import { ROOMIFY_RENDER_PROMPT } from "./constants";
 import puter from "@heyputer/puter.js";
 
@@ -25,8 +23,8 @@ export const fetchAsDataUrl = async (url: string): Promise<string> => {
     });
 };
 
-export const generate3DView = async ({sourceImage}: generate3DViewParams) => {
-    const dataUrl =sourceImage.startsWith('data:') ? sourceImage : await fetchAsDataUrl(sourceImage);
+export const generate3DView = async ({sourceImage}: Generate3DViewParams) => {
+    const dataUrl = sourceImage.startsWith('data:') ? sourceImage : await fetchAsDataUrl(sourceImage);
 
     const base64Data = dataUrl.split(',')[1];
     const mimeType = dataUrl.split(';')[0].split(":")[1];
@@ -49,5 +47,4 @@ export const generate3DView = async ({sourceImage}: generate3DViewParams) => {
 
     const renderedImage = rawImageUrl.startsWith('data:') ? rawImageUrl : await fetchAsDataUrl(rawImageUrl);
     return {renderedImage, renderedPath:undefined};
-    
 }
