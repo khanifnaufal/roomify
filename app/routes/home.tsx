@@ -54,16 +54,20 @@ export default function Home() {
     } finally {
       isCreatingProjectRef.current = false;
     }
-    
+
 
   }
-  useEffect(() =>{
+  useEffect(() => {
+    let isMounted = true;
     const fetchProjects = async () => {
       const items = await getProjects();
-      setProjects(items)
-    }
-    fetchProjects();
-  })
+      if (isMounted) setProjects(items);
+    };
+    void fetchProjects();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   return (
     <div className="home">
       <Navbar />
